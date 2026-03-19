@@ -4,6 +4,7 @@ import { AuthKitProvider, useAuth } from '@workos-inc/authkit-react';
 import { ConvexReactClient } from 'convex/react';
 import { ConvexProviderWithAuthKit } from './ConvexProviderWithAuthKit';
 import './index.css';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import { ErrorBoundary } from './ErrorBoundary.tsx';
 
@@ -17,7 +18,9 @@ createRoot(document.getElementById('root')!).render(
         redirectUri={import.meta.env.VITE_WORKOS_REDIRECT_URI}
       >
         <ConvexProviderWithAuthKit client={convex} useAuth={useAuth}>
-          <App />
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
         </ConvexProviderWithAuthKit>
       </AuthKitProvider>
     </ErrorBoundary>
