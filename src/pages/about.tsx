@@ -1,22 +1,32 @@
-import { Link } from 'react-router-dom';
+import {
+    bodyMuted,
+    bodyMutedSm,
+    chip,
+    cn,
+    displayHeading,
+    eyebrow,
+    featureCard,
+    featureTitle,
+    heroCard,
+    heroCopy,
+    heroGlow,
+    pageMainDefault,
+    pageShell,
+    sectionHeading,
+    sectionHeadingSm,
+    stackSection,
+} from '../lib/ui';
 
 export default function About() {
     return (
-        <div className="min-h-screen flex flex-col bg-light dark:bg-dark text-dark dark:text-light">
-            <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-16 px-4 py-12 sm:px-6 sm:py-16">
-                <section className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-slate-50 to-white p-8 shadow-sm dark:border-slate-800 dark:from-slate-900/80 dark:to-slate-950 sm:p-12">
-                    <div
-                        aria-hidden
-                        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl dark:bg-emerald-400/10"
-                    />
-                    <div className="relative max-w-2xl space-y-4">
-                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
-                            About
-                        </p>
-                        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                            Run bingo nights with calm, clear tooling
-                        </h1>
-                        <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400">
+        <div className={pageShell}>
+            <main className={pageMainDefault}>
+                <section className={heroCard}>
+                    <div aria-hidden className={heroGlow} />
+                    <div className={heroCopy}>
+                        <p className={eyebrow}>About</p>
+                        <h1 className={displayHeading}>Run bingo nights with calm, clear tooling</h1>
+                        <p className={bodyMuted}>
                             Bingo Manager is a lightweight web app for organizing sessions, keeping calls and boards in
                             sync, and giving hosts a single place to manage the flow of the game—without juggling
                             spreadsheets or paper scraps.
@@ -26,8 +36,8 @@ export default function About() {
 
                 <section className="space-y-6">
                     <div className="max-w-2xl">
-                        <h2 className="text-xl font-semibold tracking-tight">What you can do</h2>
-                        <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                        <h2 className={sectionHeading}>What you can do</h2>
+                        <p className={cn('mt-2', bodyMutedSm)}>
                             Starter capabilities you can extend as the project grows.
                         </p>
                     </div>
@@ -46,29 +56,23 @@ export default function About() {
                                 body: 'Runs in the browser with a modern stack—fast to iterate and easy to deploy.',
                             },
                         ].map((item) => (
-                            <li
-                                key={item.title}
-                                className="flex flex-col gap-2 rounded-xl border border-slate-200 bg-white/60 p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900/40"
-                            >
-                                <h3 className="text-sm font-semibold">{item.title}</h3>
-                                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">{item.body}</p>
+                            <li key={item.title} className={featureCard}>
+                                <h3 className={featureTitle}>{item.title}</h3>
+                                <p className={bodyMutedSm}>{item.body}</p>
                             </li>
                         ))}
                     </ul>
                 </section>
 
-                <section className="rounded-2xl border border-slate-200 bg-slate-50/80 p-6 dark:border-slate-800 dark:bg-slate-900/50 sm:p-8">
-                    <h2 className="text-lg font-semibold tracking-tight">Stack</h2>
-                    <p className="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400">
+                <section className={stackSection}>
+                    <h2 className={sectionHeadingSm}>Stack</h2>
+                    <p className={cn('mt-2 max-w-2xl', bodyMutedSm)}>
                         This project pairs a React front end with Convex for data and WorkOS AuthKit for sign-in—wired for
                         real-time updates and secure access.
                     </p>
                     <div className="mt-6 flex flex-wrap gap-2">
                         {['React', 'Vite', 'Tailwind CSS', 'Convex', 'WorkOS AuthKit'].map((label) => (
-                            <span
-                                key={label}
-                                className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-300"
-                            >
+                            <span key={label} className={chip}>
                                 {label}
                             </span>
                         ))}

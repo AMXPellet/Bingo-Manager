@@ -42,7 +42,7 @@ export const lookupByJoinCode = query({
   },
 });
 
-/** Inserts demo rows if the table is empty (for local dev). */
+/**TODO: Remove this when I have my create game logic running. */
 export const seedDemoGames = mutation({
   args: {},
   handler: async (ctx) => {

@@ -2,6 +2,31 @@ import { useState, useRef, useEffect, type SubmitEvent } from 'react';
 import { usePaginatedQuery, useQuery, useMutation } from 'convex/react';
 
 import { api } from '../../convex/_generated/api';
+import {
+    boardCard,
+    bodyMuted,
+    bodyMutedSm,
+    btnEmerald,
+    btnSecondary,
+    cardGrid,
+    cardHeading,
+    cn,
+    displayHeading,
+    dropdownMenu,
+    eyebrow,
+    featureTitle,
+    heroCard,
+    heroCopy,
+    heroGlow,
+    iconButtonMenu,
+    menuItem,
+    menuItemDanger,
+    pageMainBoards,
+    panelSurface,
+    pageShell,
+    tabTriggerActive,
+    tabTriggerInactive,
+} from '../lib/ui';
 
 type BoardTab = 'joinable' | 'joined';
 
@@ -56,7 +81,7 @@ function BoardCard({
     const primaryLabel = tab === 'joinable' ? 'Join' : 'Play';
 
     return (
-        <article className="group flex flex-col overflow-hidden rounded-xl border border-slate-200/90 bg-white shadow-sm transition hover:border-emerald-500/30 hover:shadow-md dark:border-slate-800 dark:bg-slate-900/40 dark:hover:border-emerald-500/25">
+        <article className={boardCard}>
             <div className="relative aspect-[16/9] overflow-hidden bg-slate-100 dark:bg-slate-800">
                 <img
                     src={board.imageUrl}
@@ -66,11 +91,11 @@ function BoardCard({
             </div>
             <div className="flex flex-1 flex-col gap-3 p-4 sm:p-5">
                 <div className="flex items-start justify-between gap-2">
-                    <h3 className="text-lg font-semibold leading-snug tracking-tight">{board.title}</h3>
+                    <h3 className={cardHeading}>{board.title}</h3>
                     <div className="relative shrink-0" ref={menuRef}>
                         <button
                             type="button"
-                            className="rounded-lg p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                            className={iconButtonMenu}
                             aria-expanded={menuOpen}
                             aria-haspopup="menu"
                             aria-label={`Actions for ${board.title}`}
@@ -85,12 +110,12 @@ function BoardCard({
                         {menuOpen ? (
                             <div
                                 role="menu"
-                                className="absolute right-0 z-20 mt-1 min-w-[11rem] rounded-lg border border-slate-200 bg-white py-1 shadow-lg dark:border-slate-700 dark:bg-slate-900"
+                                className={dropdownMenu}
                             >
                                 <button
                                     type="button"
                                     role="menuitem"
-                                    className="flex w-full px-3 py-2 text-left text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
+                                    className={menuItem}
                                     onClick={() => {
                                         onMenuOpenChange(false);
                                     }}
@@ -101,7 +126,7 @@ function BoardCard({
                                     <button
                                         type="button"
                                         role="menuitem"
-                                        className="flex w-full px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/40"
+                                        className={menuItemDanger}
                                         onClick={() => {
                                             onMenuOpenChange(false);
                                         }}
@@ -113,12 +138,15 @@ function BoardCard({
                         ) : null}
                     </div>
                 </div>
-                <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                <p className={cn('line-clamp-3 flex-1', bodyMutedSm)}>
                     {board.description}
                 </p>
                 <button
                     type="button"
-                    className="inline-flex w-full items-center justify-center rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 dark:bg-emerald-500 dark:hover:bg-emerald-600"
+                    className={cn(
+                        'inline-flex w-full items-center justify-center px-4 py-2.5',
+                        btnEmerald,
+                    )}
                 >
                     {primaryLabel}
                 </button>
@@ -151,9 +179,9 @@ function JoinCodeLookup() {
     const found = submitted !== null && lookup != null;
 
     return (
-        <div className="rounded-xl border border-slate-200/90 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/40 sm:p-5">
-            <h2 className="text-sm font-semibold text-slate-900 dark:text-slate-100">Join with a code</h2>
-            <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+        <div className={panelSurface}>
+            <h2 className={cn(featureTitle, 'text-slate-900 dark:text-slate-100')}>Join with a code</h2>
+            <p className={cn('mt-1', bodyMutedSm)}>
                 Enter a code from your host to join a game that may not appear in the public list.
             </p>
             <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end">
@@ -171,10 +199,7 @@ function JoinCodeLookup() {
                         className="w-full rounded-lg border border-slate-200 bg-white px-4 py-2.5 font-mono text-sm uppercase tracking-wide text-slate-900 shadow-sm placeholder:normal-case placeholder:tracking-normal placeholder:text-slate-400 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:placeholder:text-slate-500"
                     />
                 </div>
-                <button
-                    type="submit"
-                    className="shrink-0 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 dark:bg-emerald-500 dark:hover:bg-emerald-600"
-                >
+                <button type="submit" className={cn('shrink-0 px-5 py-2.5', btnEmerald)}>
                     Find game
                 </button>
             </form>
@@ -200,7 +225,10 @@ function JoinCodeLookup() {
                     ) : null}
                     <button
                         type="button"
-                        className="mt-3 inline-flex w-full items-center justify-center rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600 sm:w-auto"
+                        className={cn(
+                            'mt-3 inline-flex w-full items-center justify-center px-4 py-2 sm:w-auto',
+                            btnEmerald,
+                        )}
                     >
                         Join this game
                     </button>
@@ -220,26 +248,19 @@ export default function Boards() {
         { initialNumItems: 6 },
     );
 
-    const seedDemoGames = useMutation(api.games.seedDemoGames);
-
     const loadingFirst = status === 'LoadingFirstPage';
     const canLoadMore = status === 'CanLoadMore' || status === 'LoadingMore';
     const loadingMore = status === 'LoadingMore';
 
     return (
-        <div className="flex min-h-screen flex-col bg-light text-dark dark:bg-dark dark:text-light">
-            <main className="mx-auto flex w-full max-w-5xl flex-1 flex-col gap-10 px-4 py-12 sm:px-6 sm:py-16">
-                <section className="relative overflow-hidden rounded-2xl border border-slate-200/90 bg-gradient-to-br from-slate-50 to-white p-8 shadow-sm dark:border-slate-800 dark:from-slate-900/80 dark:to-slate-950 sm:p-12">
-                    <div
-                        aria-hidden
-                        className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl dark:bg-emerald-400/10"
-                    />
-                    <div className="relative max-w-2xl space-y-4">
-                        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-emerald-700 dark:text-emerald-400">
-                            Boards
-                        </p>
-                        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Active boards</h1>
-                        <p className="text-base leading-relaxed text-slate-600 dark:text-slate-400">
+        <div className={pageShell}>
+            <main className={pageMainBoards}>
+                <section className={heroCard}>
+                    <div aria-hidden className={heroGlow} />
+                    <div className={heroCopy}>
+                        <p className={eyebrow}>Boards</p>
+                        <h1 className={displayHeading}>Active boards</h1>
+                        <p className={bodyMuted}>
                             Browse public games or join a session with a code from your host. Open games you are already
                             in from the Your games tab.
                         </p>
@@ -258,11 +279,7 @@ export default function Boards() {
                             id="tab-joinable"
                             aria-selected={tab === 'joinable'}
                             aria-controls="panel-joinable"
-                            className={
-                                tab === 'joinable'
-                                    ? '-mb-px border-b-2 border-emerald-600 px-4 py-2.5 text-sm font-semibold text-emerald-800 dark:text-emerald-300'
-                                    : 'border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
-                            }
+                            className={tab === 'joinable' ? tabTriggerActive : tabTriggerInactive}
                             onClick={() => {
                                 setTab('joinable');
                                 setOpenMenuId(null);
@@ -276,11 +293,7 @@ export default function Boards() {
                             id="tab-joined"
                             aria-selected={tab === 'joined'}
                             aria-controls="panel-joined"
-                            className={
-                                tab === 'joined'
-                                    ? '-mb-px border-b-2 border-emerald-600 px-4 py-2.5 text-sm font-semibold text-emerald-800 dark:text-emerald-300'
-                                    : 'border-b-2 border-transparent px-4 py-2.5 text-sm font-medium text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-slate-200'
-                            }
+                            className={tab === 'joined' ? tabTriggerActive : tabTriggerInactive}
                             onClick={() => {
                                 setTab('joined');
                                 setOpenMenuId(null);
@@ -300,7 +313,7 @@ export default function Boards() {
                         <JoinCodeLookup />
 
                         {loadingFirst ? (
-                            <div className="grid gap-6 sm:grid-cols-2">
+                            <div className={cardGrid}>
                                 {[0, 1, 2].map((i) => (
                                     <div
                                         key={i}
@@ -317,20 +330,13 @@ export default function Boards() {
                             </div>
                         ) : results.length === 0 ? (
                             <div className="rounded-xl border border-dashed border-slate-200 px-4 py-10 text-center dark:border-slate-700">
-                                <p className="text-sm text-slate-600 dark:text-slate-400">
-                                    No public games yet. You can add sample data for development.
+                                <p className={bodyMutedSm}>
+                                    No public games right now.
                                 </p>
-                                <button
-                                    type="button"
-                                    className="mt-4 inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
-                                    onClick={() => void seedDemoGames({})}
-                                >
-                                    Add sample games
-                                </button>
                             </div>
                         ) : (
                             <>
-                                <ul className="grid gap-6 sm:grid-cols-2">
+                                <ul className={cardGrid}>
                                     {results.map((game) => {
                                         const imageUrl =
                                             game.imageUrl ??
@@ -358,7 +364,7 @@ export default function Boards() {
                                     <div className="flex justify-center pt-2">
                                         <button
                                             type="button"
-                                            className="rounded-lg border border-slate-300 bg-white px-5 py-2.5 text-sm font-medium text-slate-800 shadow-sm hover:bg-slate-50 disabled:opacity-60 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+                                            className={cn('px-5 py-2.5', btnSecondary)}
                                             disabled={loadingMore}
                                             onClick={() => loadMore(6)}
                                         >
@@ -377,7 +383,7 @@ export default function Boards() {
                         hidden={tab !== 'joined'}
                         className="space-y-4"
                     >
-                        <ul className="grid gap-6 sm:grid-cols-2">
+                        <ul className={cardGrid}>
                             {JOINED_BOARDS.map((board) => (
                                 <li key={board.id}>
                                     <BoardCard

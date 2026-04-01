@@ -132,7 +132,7 @@ function userMenu(){
 
 export default function Navbar() {
     return (
-        <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-light/90 backdrop-blur-md dark:border-slate-800/80 dark:bg-dark/90">
+        <header className="sticky top-0 z-50 shrink-0 border-b border-slate-200/80 bg-light/90 backdrop-blur-md dark:border-slate-800/80 dark:bg-dark/90">
         <div className="mx-auto flex h-14 max-w-5xl items-center gap-4 px-4 sm:px-6">
         <NavLink
             to="/"
