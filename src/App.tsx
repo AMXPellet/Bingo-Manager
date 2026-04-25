@@ -4,11 +4,17 @@ import { Authenticated, Unauthenticated} from 'convex/react';
 import Start from './pages/start.tsx';
 import About from './pages/about.tsx';
 import Boards from './pages/boards.tsx';
+import BoardDetails from './pages/boardDetails.tsx'
+import PlayBoard from './pages/playBoard.tsx'
+import HostBoard from './pages/hostBoard.tsx'
+
+
 
 import NotFound from './pages/notfound.tsx';
 
 import Footer from './components/footer.tsx';
 import Navbar from './components/navbar.tsx';
+
 
 export default function App() {
     return (
@@ -29,6 +35,10 @@ export default function App() {
                 <Route path = '/boards' element={<Boards/>}/>
                 {/* TODO: Remove login route and replace with a user profile page. */}
                 {/*Catch All for 404 page*/}
+                <Route path='/boards/:boardId' element={<BoardDetails />} />
+                <Route path='/play/:boardId' element={<PlayBoard />} />
+                <Route path='/host/:boardId' element={<HostBoard />} />
+
                 <Route path = '*' element={<NotFound/>}/>
             </Routes>
             </Authenticated>

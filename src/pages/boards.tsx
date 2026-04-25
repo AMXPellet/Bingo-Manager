@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, type SubmitEvent } from 'react';
 import { usePaginatedQuery, useQuery, useMutation } from 'convex/react';
-
+import { Link } from 'react-router-dom';
 import { api } from '../../convex/_generated/api';
 import {
     boardCard,
@@ -141,7 +141,7 @@ function BoardCard({
                 <p className={cn('line-clamp-3 flex-1', bodyMutedSm)}>
                     {board.description}
                 </p>
-                <button
+                {/*<button
                     type="button"
                     className={cn(
                         'inline-flex w-full items-center justify-center px-4 py-2.5',
@@ -149,7 +149,16 @@ function BoardCard({
                     )}
                 >
                     {primaryLabel}
-                </button>
+                </button>*/}
+                <Link
+                    to={
+                        tab === 'joinable'
+                            ? `/boards/${board.id}`
+                            : `/play/${board.id}`
+                    }
+                >
+                    {primaryLabel}
+                </Link>
             </div>
         </article>
     );
